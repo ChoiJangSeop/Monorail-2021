@@ -12,6 +12,16 @@ public class PlayTrigger {
                 p.setPlayStrategy(new PutTile(arg.get(0), arg.get(1), arg.get(2)));
                 p.playTurn();
                 break;
+            
+            case "TurnEnd" :
+                p.setPlayStrategy(new EndTurn());
+                p.playTurn();
+                break;
+            
+            case "ImpossibleDeclare" :
+                p.setPlayStrategy(new DeclareImp());
+                p.playTurn();
+                break;
         }
     }
 
@@ -30,15 +40,9 @@ public class PlayTrigger {
     public void trig (Player p, String message) {
         
         switch (message) {
-            case "TurnEnd" :
-                p.setPlayStrategy(new EndTurn());
-                p.playTurn();
+            case "EndGame" :
                 break;
             
-            case "ImpossibleDeclare" :
-                p.setPlayStrategy(new DeclareImp());
-                p.playTurn();
-                break;
         }
     }
 }

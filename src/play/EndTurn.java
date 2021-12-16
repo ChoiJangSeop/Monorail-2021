@@ -1,12 +1,13 @@
 package play;
 
+import board.Board;
 import checker.*;
 
 public class EndTurn implements PlayStrategy {
 
     @Override
     public void play() {
-
+        Board.getInstance().initUseTile();
     }
 
     @Override

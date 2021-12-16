@@ -1,17 +1,16 @@
 package checker;
 
+import board.Board;
 import system.System;
 
 public class FullTileConnect extends Checker {
     @Override
     public System.State check() {
-        boolean flag = false;
-
-        // check for board to be all connect
-
-        if (flag) {
+       
+        if (Board.getInstance().isAllConnect()) {
             return System.State.GAME_END;
         }
+        
         return System.State.TURN_END;
     }
 }

@@ -15,7 +15,7 @@ public class PutTile implements PlayStrategy {
 
     @Override
     public void play() {
-        Board.getInstance().pushTile(type, x, y);
+        //Board.getInstance().pushTile(type, x, y);
     } 
 
     @Override

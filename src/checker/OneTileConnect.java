@@ -1,15 +1,15 @@
 package checker;
 
 import system.System;
+import board.*;
+import java.util.*;
 
 public class OneTileConnect extends Checker {
     @Override
     public System.State check() {
-        int flag = 0;
 
-        // checking code
-
-        if (flag == 1) {
+        if (Board.getInstance().isTileConnect() && Board.getInstance().isTileConnect()) {
+            // 에러 팝업창 띄우기
             return System.State.TILE_CONNECT_ERROR;
         }
 

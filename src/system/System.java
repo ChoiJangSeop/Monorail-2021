@@ -1,6 +1,5 @@
 package system;
 
-import board.*;
 import java.util.*;
 
 public class System {
@@ -15,8 +14,8 @@ public class System {
     };
 
     private static System instance = null;
+    
     int curPlayer = 0;
-
     private List<Player> players = new ArrayList<Player>();
 
     private System() {
@@ -31,34 +30,62 @@ public class System {
         return instance;
     }   
 
+    
 
     public void endAction(System.State state) {
-        if (state == System.State.GAME_END) {
-            // 게임종료
+
+        switch (state) {
+            case GAME_END :
+                beginAction("EndGame");
+                break;
+            
+            case TURN_END :
+                curPlayer = (curPlayer + 1) % 2;
+                Lock.getInstance().openLock();
+                break;
+
+            case ZERO_TILE_ERROR :
+                beginAction("HandleError", "ZeroTileError");
+                break;
+            
+            case NO_TILE_ERROR :
+                beginAction("HandleError", "NoTileError");
+                break;
+
+            case OVER_TILE_ERROR :
+                beginAction("HandleError", "OverTileError");
+                break;
+            
+            case TILE_CONNECT_ERROR :
+                beginAction("HandleError", "TileConnectError");
+                break;
+            
+            case NONE :
+                Lock.getInstance().openLock();
+                break;
         }
-        else if (state == System.State.TURN_END) {
-            curPlayer = (curPlayer + 1) % 2;
-        }
-        else if (
-            state == System.State.NO_TILE_ERROR ||
-            state == System.State.OVER_TILE_ERROR ||
-            state == System.State.TILE_CONNECT_ERROR
-        ) {
-            beginAction("HandleError");
-        }
+       
 
     }
 
-    public void beginAction(String message, List<Integer> args) {
+    public void userBeginAction(String message, List<Integer> args) {
+        if (Lock.getInstance().getLock()) {
+            Lock.getInstance().closeLock();
+            PlayTrigger playTrigger = new PlayTrigger();
+            playTrigger.trig(players.get(curPlayer), message, args);
+        }
+        
+    }
+
+    // no user input
+    public void beginAction(String message, String arg) {
         PlayTrigger playTrigger = new PlayTrigger();
-        playTrigger.trig(players.get(curPlayer), message, args);
+        playTrigger.trig(players.get(curPlayer), message, arg);
     }
 
+    // needs user input
     public void beginAction(String message) {
         PlayTrigger playTrigger = new PlayTrigger();
         playTrigger.trig(players.get(curPlayer), message);
     }
-
-
-
 }
