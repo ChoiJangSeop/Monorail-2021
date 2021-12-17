@@ -8,8 +8,8 @@ public class PlayTrigger {
     public void trig (Player p, String message, List<Integer> arg) {
         
         switch (message) {
-            case "PutTile" :
-                p.setPlayStrategy(new PutTile(arg.get(0), arg.get(1), arg.get(2)));
+            case "PutTile" : 
+                p.setPlayStrategy(new PutTile(arg));
                 p.playTurn();
                 break;
             

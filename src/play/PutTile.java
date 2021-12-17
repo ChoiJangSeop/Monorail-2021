@@ -2,15 +2,22 @@ package play;
 
 import board.*;
 import checker.*;
+import java.util.*;
 
 public class PutTile implements PlayStrategy {
     int x, y;
-    int type;
+    List<Integer> connectable;
 
-    public PutTile(int x, int y, int type) {
-        this.x = x;
-        this.y = y;
-        this.type = type;
+    // TODO eidt input
+    public PutTile(List<Integer> args) {
+        this.x = args.get(0);
+        this.y = args.get(1);
+
+        for (int i=0; i<args.size(); ++i) {
+            if (i >= 2 && i < 6)  {
+                connectable.add(args.get(i));
+            } 
+        }
     }
 
     @Override

@@ -2,8 +2,6 @@ package play;
 
 import checker.ExecuteChecker;
 
-import java.util.*;
-
 import board.Board;
 
 public class HandleError implements PlayStrategy {
@@ -18,17 +16,26 @@ public class HandleError implements PlayStrategy {
     public void play() {
         switch (message)  {
             case "ZeroTileError" :
+                // TODO pop up the error window
                 break;
 
             case "OverTileError" :
+                // TODO pop up the error window          
                 Board.getInstance().popTile();
                 break;
 
             case "NoTileError" :
+                // TODO pop up the error window    
                 Board.getInstance().popTile();    
                 break;
 
             case "TileConnectError" :
+                // TODO pop up the error window
+                Board.getInstance().popTile();
+                break;
+            
+            case "RailConnectError" :
+                // TODO pop up the error window    
                 Board.getInstance().popTile();
                 break;
         }

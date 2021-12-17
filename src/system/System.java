@@ -7,7 +7,8 @@ public class System {
         NONE,
         TURN_END, 
         GAME_END, 
-        TILE_CONNECT_ERROR,  
+        TILE_CONNECT_ERROR,
+        RAIL_CONNECT_ERROR,  
         NO_TILE_ERROR,
         ZERO_TILE_ERROR,
         OVER_TILE_ERROR  

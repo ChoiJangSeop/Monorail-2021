@@ -4,13 +4,18 @@ public class CheckerFactory {
     public Checker createChecker(String checker) {
         Checker ret = null;
         switch (checker) {
-            case "OneTileConnect":
-                ret = new OneTileConnect();
+            case "RailConnect":
+                ret = new RailConnectChecker();
                 break;
-            case "FullTileConnect":
-                ret = new FullTileConnect();
+            case "AllConnect":
+                ret = new AllConnectChecker();
                 break;
-            // 추가적인 점검 모듈 작성 예정
+            case "TileConnect":
+                ret = new TileConnectChecker();
+                break;
+            case "NumTile":
+                ret = new NumTileChecker();
+                break;
         }
 
         return ret;
