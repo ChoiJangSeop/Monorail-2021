@@ -5,19 +5,24 @@ import java.util.*;
 
 public class ExecuteChecker {
 
-    public void execute(String action) {
+    // TODO 같은 자리에 타일을 다시 놓을때 생기는 예외처리
+
+    public MainSystem.State execute(String action) {
         CheckerFactory checkerFactory = new CheckerFactory();
         List<MainSystem.State> result = new ArrayList<>();
 
+        // TODO 타일 일자로 놓는거 체킹 필요!
         switch(action) {
             case "PutTile": 
                 // 메세지 우선순위에 맞게 작성
-                result.add(checkerFactory.createChecker("NumTile").check());    
+                result.add(checkerFactory.createChecker("UseTile").check());
+                result.add(checkerFactory.createChecker("RestTile").check());    
                 result.add(checkerFactory.createChecker("TileConnect").check());
                 result.add(checkerFactory.createChecker("RailConnect").check());
                 break;                
             
-            case "EndTurn": 
+            case "EndTurn":
+                result.add(checkerFactory.createChecker("UseTile").check());             
                 result.add(checkerFactory.createChecker("AllConnect").check());
                 break;
             
@@ -25,20 +30,20 @@ public class ExecuteChecker {
                 result.add(checkerFactory.createChecker("TileConnect").check());
                 result.add(checkerFactory.createChecker("RailConnect").check());
                 break;
-            
             // detail
 
         }
 
-        // TODO result 정리 코드
+        // COMPLETE result 정리 코드 
         result = result.stream().filter(s -> s != MainSystem.State.NONE).toList();
 
         if (result.size() == 0) {
             System.out.println("none");
-            MainSystem.getInstance().endAction(MainSystem.State.NONE);
+            return MainSystem.State.NONE;
+            //MainSystem.getInstance().endAction(MainSystem.State.NONE);
         } else {
-            System.out.println("error");
-            MainSystem.getInstance().endAction(result.get(0));
+            return result.get(0);
+            //MainSystem.getInstance().endAction(result.get(0));
         }
     }
 }

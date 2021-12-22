@@ -10,7 +10,7 @@ public class Board {
     private TileState.Connect horizontalLine[][] = new TileState.Connect[18][18];
     private TileState.Connect verticalLine[][] = new TileState.Connect[18][18];
     private Stack<Tile> tileLog = new Stack<>();
-    private int restTile = 16;
+    private int restTile;
     private int useTile;
     
 
@@ -34,6 +34,9 @@ public class Board {
 
         instance.pushTile(5, 7, type);
         instance.pushTile(5, 8, type);
+        
+        this.useTile = 0;
+        this.restTile = 16;
     }
 
     // pop and push tile
@@ -77,6 +80,8 @@ public class Board {
     public int getRestTile() { return this.restTile; }
     public int getUseTile() { return this.useTile; }
     public void initUseTile() { this.useTile = 0; }
+
+    
 
     // connecting checking
     public List<TileState.Connect> getAdjacnetState() {

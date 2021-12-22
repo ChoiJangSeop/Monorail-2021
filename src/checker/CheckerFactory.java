@@ -13,8 +13,11 @@ public class CheckerFactory {
             case "TileConnect":
                 ret = new TileConnectChecker();
                 break;
-            case "NumTile":
-                ret = new NumTileChecker();
+            case "UseTile":
+                ret = new UseTileChecker();
+                break;
+            case "RestTile":
+                ret = new RestTileChecker();
                 break;
         }
 

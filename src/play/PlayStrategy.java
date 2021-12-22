@@ -1,7 +1,9 @@
 package play;
 
+import system.MainSystem;
+
 public interface PlayStrategy {
 
     public void play();
-    public void validCheck();
+    public MainSystem.State validCheck();
 }

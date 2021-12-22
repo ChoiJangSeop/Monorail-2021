@@ -27,7 +27,17 @@ public class EndTurnButton implements ControlButton {
                     ImgStore.getInstance().getImg("P2Img")
                 );
 
-                sendMessage("TurnEnd");
+                boolean result = sendMessage("TurnEnd");
+
+                if (!result) {
+                    curPlayer = (curPlayer + 1) % 2;
+                
+                    turnPlayerButton.setIcon(
+                        (curPlayer == 0) ?
+                        ImgStore.getInstance().getImg("P1Img") :
+                        ImgStore.getInstance().getImg("P2Img")
+                    );
+                }
 
             }
         });

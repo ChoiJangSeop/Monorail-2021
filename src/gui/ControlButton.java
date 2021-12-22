@@ -16,12 +16,12 @@ public interface ControlButton {
         return new JButton();
     }
 
-    public default void sendMessage(String message) {
-        MainSystem.getInstance().userBeginAction(message);
+    public default boolean sendMessage(String message) {
+        return MainSystem.getInstance().userBeginAction(message);
     }
     
 
-    public default void sendMessage(String message, List<Integer> args) {
-        MainSystem.getInstance().userBeginAction(message, args);
+    public default boolean sendMessage(String message, List<Integer> args) {
+        return MainSystem.getInstance().userBeginAction(message, args);
     }
 }

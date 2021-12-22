@@ -30,16 +30,25 @@ public class Ground implements ControlButton {
                 public void actionPerformed(ActionEvent e) {
                     JButton b = (JButton)e.getSource();
                     int pos = Integer.parseInt(b.getName());
+
+                    if (pos == -1) {
+                        return;
+                    }
                     
                     // add arguments
                     List<Integer> args = new ArrayList<>();
                     args.add(pos/17); args.add(pos%17);
                     args.add(selectMode.getTileType());
-                    b.setIcon(ImgStore.getInstance().getRail(selectMode.getTileType()));
-                    
+                   
+                    // TODO 타일타입 예외처리
+                    boolean result = sendMessage("PutTile", args);
+
+                    if (result) {
+                        b.setIcon(ImgStore.getInstance().getRail(selectMode.getTileType()));
+                        b.setName("-1");
+                    }
                     selectMode.initTileType();
 
-                    sendMessage("PutTile", args);
                 }
             });
         }

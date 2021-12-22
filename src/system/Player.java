@@ -9,9 +9,9 @@ public class Player {
     public Player(String name) { this.name = name; }
     public String getName() { return this.name; }
 
-    public void playTurn() { 
+    public MainSystem.State playTurn() { 
         this.playStrategy.play();
-        this.playStrategy.validCheck(); 
+        return this.playStrategy.validCheck(); 
     }
 
     public void setPlayStrategy(PlayStrategy playStrategy) {

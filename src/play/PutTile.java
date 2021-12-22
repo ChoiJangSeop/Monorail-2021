@@ -4,11 +4,13 @@ import board.*;
 import checker.*;
 import java.util.*;
 
+import system.MainSystem;
+
 public class PutTile implements PlayStrategy {
     int x, y;
     List<Integer> connectable = new ArrayList<>();
 
-    // TODO eidt input
+    // COMPLETE eidt input
     public PutTile(List<Integer> args) {
         this.x = args.get(0);
         this.y = args.get(1);
@@ -64,8 +66,8 @@ public class PutTile implements PlayStrategy {
     } 
 
     @Override
-    public void validCheck() {
+    public MainSystem.State validCheck() {
         ExecuteChecker executeChecker = new ExecuteChecker();
-        executeChecker.execute("PutTile");
+        return executeChecker.execute("PutTile");
     }
 }

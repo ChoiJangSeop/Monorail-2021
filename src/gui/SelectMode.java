@@ -24,7 +24,6 @@ public class SelectMode extends JFrame {
                     JButton b = (JButton)e.getSource();
                     int name = Integer.parseInt(b.getName());
                     tileType = name;
-                    System.out.println(tileType);
                 }
             });
             
