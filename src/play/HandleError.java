@@ -3,6 +3,7 @@ package play;
 import checker.ExecuteChecker;
 
 import board.Board;
+import Monorail.OtherWindow;
 
 public class HandleError implements PlayStrategy {
 
@@ -16,27 +17,34 @@ public class HandleError implements PlayStrategy {
     public void play() {
         switch (message)  {
             case "ZeroTileError" :
-                // TODO pop up the error window
+                System.out.println("error1");
                 break;
 
             case "OverTileError" :
-                // TODO pop up the error window          
+                System.out.println("error2");          
                 Board.getInstance().popTile();
+                // TODO remove rail img in gui
                 break;
 
             case "NoTileError" :
-                // TODO pop up the error window    
-                Board.getInstance().popTile();    
+                System.out.println("error3");    
+                Board.getInstance().popTile();
+                // TODO remove rail img in gui    
                 break;
 
             case "TileConnectError" :
-                // TODO pop up the error window
+                System.out.println("error4");
                 Board.getInstance().popTile();
+                // TODO remove rail img in gui
                 break;
             
             case "RailConnectError" :
-                // TODO pop up the error window    
+                System.out.println("error5");    
                 Board.getInstance().popTile();
+                break;
+            
+            case "InputArgError" :
+                System.out.println("error6");
                 break;
         }
     }
@@ -47,3 +55,4 @@ public class HandleError implements PlayStrategy {
         executeChecker.execute("HandleError");
     }
 }
+

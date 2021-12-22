@@ -1,16 +1,17 @@
 package checker;
 
-import system.System;
+import system.MainSystem;
 import java.util.*;
 
 public class ExecuteChecker {
 
     public void execute(String action) {
         CheckerFactory checkerFactory = new CheckerFactory();
-        List<System.State> result = new ArrayList<>();
+        List<MainSystem.State> result = new ArrayList<>();
 
         switch(action) {
             case "PutTile": 
+                // 메세지 우선순위에 맞게 작성
                 result.add(checkerFactory.createChecker("NumTile").check());    
                 result.add(checkerFactory.createChecker("TileConnect").check());
                 result.add(checkerFactory.createChecker("RailConnect").check());
@@ -21,7 +22,6 @@ public class ExecuteChecker {
                 break;
             
             case "HandleError": 
-                result.add(checkerFactory.createChecker("NumTile").check());    
                 result.add(checkerFactory.createChecker("TileConnect").check());
                 result.add(checkerFactory.createChecker("RailConnect").check());
                 break;
@@ -31,12 +31,14 @@ public class ExecuteChecker {
         }
 
         // TODO result 정리 코드
-        result = result.stream().filter(s -> s != System.State.NONE).toList();
+        result = result.stream().filter(s -> s != MainSystem.State.NONE).toList();
 
         if (result.size() == 0) {
-            System.getInstance().endAction(System.State.NONE);
+            System.out.println("none");
+            MainSystem.getInstance().endAction(MainSystem.State.NONE);
         } else {
-            System.getInstance().endAction(result.get(0));
+            System.out.println("error");
+            MainSystem.getInstance().endAction(result.get(0));
         }
     }
 }

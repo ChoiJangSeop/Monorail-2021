@@ -2,11 +2,11 @@ package system;
 
 public class Lock {
 
-    boolean lock = false;
+    boolean lock;
     private static Lock instance = null;
 
     private Lock() {
-        this.lock = false;
+        this.lock = true;
     }
 
     public static Lock getInstance() {

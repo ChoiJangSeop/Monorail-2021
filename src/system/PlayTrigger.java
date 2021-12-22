@@ -6,10 +6,14 @@ import play.*;
 public class PlayTrigger {
 
     public void trig (Player p, String message, List<Integer> arg) {
+
+        
         
         switch (message) {
             case "PutTile" : 
-                p.setPlayStrategy(new PutTile(arg));
+                if (arg.size() == 3 && arg.get(2) >= 0) { 
+                    p.setPlayStrategy(new PutTile(arg)); 
+                } else { p.setPlayStrategy(new HandleError("InputArgError")); }
                 p.playTurn();
                 break;
             
@@ -20,6 +24,11 @@ public class PlayTrigger {
             
             case "ImpossibleDeclare" :
                 p.setPlayStrategy(new DeclareImp());
+                p.playTurn();
+                break;
+            
+            default :
+                p.setPlayStrategy(new HandleError("InputArgError"));
                 p.playTurn();
                 break;
         }
@@ -34,6 +43,11 @@ public class PlayTrigger {
                 p.setPlayStrategy(new HandleError(arg));
                 p.playTurn();
                 break;
+
+            default :
+                p.setPlayStrategy(new HandleError("InputArgError"));
+                p.playTurn();
+                break;
         }
     }
 
@@ -42,7 +56,16 @@ public class PlayTrigger {
         switch (message) {
             case "EndGame" :
                 break;
+
+            case "ImpossibleDeclare" :
+                p.setPlayStrategy(new DeclareImp());
+                p.playTurn();
+                break;
             
+            default :
+                p.setPlayStrategy(new HandleError("InputArgError"));
+                p.playTurn();
+                break;
         }
     }
 }

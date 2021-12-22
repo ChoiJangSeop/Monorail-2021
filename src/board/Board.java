@@ -5,7 +5,7 @@ import java.util.*;
 // singleton
 public class Board {
 
-    private static Board instance = null;
+    private static Board instance = new Board();
 
     private TileState.Connect horizontalLine[][] = new TileState.Connect[18][18];
     private TileState.Connect verticalLine[][] = new TileState.Connect[18][18];
@@ -21,32 +21,39 @@ public class Board {
                 verticalLine[i][j] = TileState.Connect.DEFAULT;
             }
         }
+        
     }
 
     public static Board getInstance() {
-        if ( instance == null) {
-            return new Board();
-        }
         return instance;
+    }
+
+    public void initBoard() {
+        List<Integer> type = new ArrayList<>();
+        type.add(0); type.add(0); type.add(1); type.add(1);
+
+        instance.pushTile(5, 7, type);
+        instance.pushTile(5, 8, type);
     }
 
     // pop and push tile
     public void pushTile(int x, int y, List<Integer> type) {
         tileLog.push(new Tile(x, y, type));
-
+        
         // up
-        TileState.pushState(horizontalLine[x][y], type.get(0));
+        horizontalLine[x][y] = TileState.pushState(horizontalLine[x][y], type.get(0));
         // down
-        TileState.pushState(horizontalLine[x+1][y], type.get(1));
+        horizontalLine[x+1][y]= TileState.pushState(horizontalLine[x+1][y], type.get(1));
         // left
-        TileState.pushState(verticalLine[x][y], type.get(2));
+        verticalLine[x][y] = TileState.pushState(verticalLine[x][y], type.get(2));
         // right
-        TileState.pushState(verticalLine[x][y+1], type.get(3));
+        verticalLine[x][y+1] = TileState.pushState(verticalLine[x][y+1], type.get(3));
 
         useTile++; restTile--;
     }
 
     public void popTile() {
+        
         int x = tileLog.peek().getX();
         int y = tileLog.peek().getY();
         List<Integer> type = tileLog.peek().getType();
@@ -54,13 +61,14 @@ public class Board {
         tileLog.pop();
 
         // up
-        TileState.popState(horizontalLine[x][y], type.get(0));
+        horizontalLine[x][y] = TileState.popState(horizontalLine[x][y], type.get(0));
+        
         // down
-        TileState.popState(horizontalLine[x+1][y], type.get(1));
+        horizontalLine[x+1][y] = TileState.popState(horizontalLine[x+1][y], type.get(1));
         // left
-        TileState.popState(verticalLine[x][y], type.get(2));
+        verticalLine[x][y] = TileState.popState(verticalLine[x][y], type.get(2));
         // right
-        TileState.popState(verticalLine[x][y+1], type.get(3));
+        verticalLine[x][y+1] = TileState.popState(verticalLine[x][y+1], type.get(3));
 
         restTile++; useTile--;
     }
@@ -73,6 +81,7 @@ public class Board {
     // connecting checking
     public List<TileState.Connect> getAdjacnetState() {
         List<TileState.Connect> ret = new ArrayList<>();
+        if (tileLog.empty()) { return ret; }
 
         int x = tileLog.peek().getX();
         int y = tileLog.peek().getY();
@@ -87,7 +96,7 @@ public class Board {
     
     public List<TileState.Connect> getAdjacnetState(int x, int y) {
         List<TileState.Connect> ret = new ArrayList<>();
-        
+        if (tileLog.empty()) { return ret; }
         ret.add(horizontalLine[x][y]);
         ret.add(horizontalLine[x+1][y]);
         ret.add(verticalLine[x][y]);

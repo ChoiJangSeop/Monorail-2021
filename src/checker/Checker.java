@@ -1,8 +1,8 @@
 package checker;
 
-import system.System;
+import system.MainSystem;
 
 public abstract class Checker {
 
-    public abstract System.State check();
+    public abstract MainSystem.State check();
 }

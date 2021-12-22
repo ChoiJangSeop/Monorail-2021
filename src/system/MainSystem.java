@@ -2,7 +2,7 @@ package system;
 
 import java.util.*;
 
-public class System {
+public class MainSystem {
     public static enum State { 
         NONE,
         TURN_END, 
@@ -14,26 +14,26 @@ public class System {
         OVER_TILE_ERROR  
     };
 
-    private static System instance = null;
+    private static MainSystem instance = null;
     
     int curPlayer = 0;
     private List<Player> players = new ArrayList<Player>();
 
-    private System() {
+    private MainSystem() {
         players.add(new Player("P1"));
         players.add(new Player("P2"));
     }
 
-    public static System getInstance() {
+    public static MainSystem getInstance() {
         if (instance == null) {
-            instance = new System();
+            instance = new MainSystem();
         }
         return instance;
     }   
 
     
 
-    public void endAction(System.State state) {
+    public void endAction(MainSystem.State state) {
 
         switch (state) {
             case GAME_END :
@@ -48,7 +48,7 @@ public class System {
             case ZERO_TILE_ERROR :
                 beginAction("HandleError", "ZeroTileError");
                 break;
-            
+                
             case NO_TILE_ERROR :
                 beginAction("HandleError", "NoTileError");
                 break;
@@ -61,6 +61,8 @@ public class System {
                 beginAction("HandleError", "TileConnectError");
                 break;
             
+            case RAIL_CONNECT_ERROR :
+                beginAction("HandleError", "RailConnectError");
             case NONE :
                 Lock.getInstance().openLock();
                 break;
@@ -76,6 +78,15 @@ public class System {
             playTrigger.trig(players.get(curPlayer), message, args);
         }
         
+    }
+
+    public void userBeginAction(String message) {
+        
+        if (Lock.getInstance().getLock()) {
+            Lock.getInstance().closeLock();
+            PlayTrigger playTrigger = new PlayTrigger();
+            playTrigger.trig(players.get(curPlayer), message);
+        }
     }
 
     // no user input

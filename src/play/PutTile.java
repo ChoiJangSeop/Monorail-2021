@@ -6,23 +6,61 @@ import java.util.*;
 
 public class PutTile implements PlayStrategy {
     int x, y;
-    List<Integer> connectable;
+    List<Integer> connectable = new ArrayList<>();
 
     // TODO eidt input
     public PutTile(List<Integer> args) {
         this.x = args.get(0);
         this.y = args.get(1);
 
-        for (int i=0; i<args.size(); ++i) {
-            if (i >= 2 && i < 6)  {
-                connectable.add(args.get(i));
-            } 
+        switch(args.get(2)) {
+            case 0 :
+                this.connectable.add(0);
+                this.connectable.add(0);
+                this.connectable.add(1);
+                this.connectable.add(1);
+                break;
+
+            case 1 :
+                this.connectable.add(1);
+                this.connectable.add(1);
+                this.connectable.add(0);
+                this.connectable.add(0);
+                break;
+            
+            case 2 :
+                this.connectable.add(1);
+                this.connectable.add(0);
+                this.connectable.add(0);
+                this.connectable.add(1);
+                break;
+
+            case 3 :
+                this.connectable.add(1);
+                this.connectable.add(0);
+                this.connectable.add(1);
+                this.connectable.add(0);
+                break;
+
+            case 4 :
+                this.connectable.add(0);
+                this.connectable.add(1);
+                this.connectable.add(1);
+                this.connectable.add(0);
+                break;
+            
+            case 5 :
+                this.connectable.add(0);
+                this.connectable.add(1);
+                this.connectable.add(0);
+                this.connectable.add(1);
+                break;
         }
     }
 
     @Override
     public void play() {
-        //Board.getInstance().pushTile(type, x, y);
+        Board.getInstance().pushTile(x, y, connectable);
     } 
 
     @Override
