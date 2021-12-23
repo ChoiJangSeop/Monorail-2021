@@ -17,7 +17,7 @@ public class HandleError implements PlayStrategy {
     @Override
     public void play() {
          
-        // TODO remove rail img in GUI
+        // COMPLETE remove rail img in GUI => 실행 결과를 GUI에게 리턴해 리턴 결과로 GUI레벨에서 처리함.
         // TODO pop up the error windows
         
 
@@ -28,34 +28,31 @@ public class HandleError implements PlayStrategy {
                 break;
 
             case "OverTileError" :
-                System.out.println("OverTileError"); 
                 new ErrorWindow();         
                 Board.getInstance().popTile();
               
                 break;
 
             case "NoTileError" :
-                System.out.println("NoTileError"); 
                 new ErrorWindow();   
                 Board.getInstance().popTile();
             
                 break;
 
             case "TileConnectError" :
-                System.out.println("TileConnectError");
                 new ErrorWindow();
                 Board.getInstance().popTile();
              
                 break;
             
             case "RailConnectError" :
-                System.out.println("RaileConnectError");  
                 new ErrorWindow();  
                 Board.getInstance().popTile();
                 break;
             
-            case "InputArgError" :
-                System.out.println("InputAgError");
+            case "TileDirectionError" :
+                new ErrorWindow();
+                Board.getInstance().popTile();
                 break;
         }
     }

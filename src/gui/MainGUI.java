@@ -10,13 +10,16 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import system.MainSystem;
 
 public class MainGUI extends JFrame {
     
+    private MainSystem mainSystem = new MainSystem();
+
     private JButton[] deco = new JButton[17];
-    private Ground ground = new Ground();
-    private EndTurnButton endTurnButton = new EndTurnButton();
-    private DeclareImpButton declareImpButton = new DeclareImpButton();
+    private Ground ground = new Ground(mainSystem);
+    private EndTurnButton endTurnButton = new EndTurnButton(mainSystem);
+    private DeclareImpButton declareImpButton = new DeclareImpButton(mainSystem);
     
 
     public MainGUI() {

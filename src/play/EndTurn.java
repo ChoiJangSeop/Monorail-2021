@@ -13,7 +13,7 @@ public class EndTurn implements PlayStrategy {
 
     @Override
     public MainSystem.State validCheck() {
-        // BUG 초기화가 체커보다 먼저돼 무조건 zerotileError가 발생
+        // COMPLETE 초기화가 체커보다 먼저돼 무조건 zerotileError가 발생 => tile init을 mainSystem이 함.
         ExecuteChecker executeChecker = new ExecuteChecker();
         return executeChecker.execute("EndTurn");
     }

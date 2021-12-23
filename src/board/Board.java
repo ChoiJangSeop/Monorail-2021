@@ -81,7 +81,24 @@ public class Board {
     public int getUseTile() { return this.useTile; }
     public void initUseTile() { this.useTile = 0; }
 
-    
+    // direction checking
+    public List<Tile> getTurnUseTiles() {
+        List<Tile> ret = new ArrayList<>();
+        Stack<Tile> temp = new Stack<>();
+
+        for (int i=0; i<this.useTile; ++i) {
+            temp.push(this.tileLog.peek());
+            ret.add(this.tileLog.peek());
+            this.tileLog.pop();
+        }
+
+        for (int i=0; i<this.useTile; ++i) {
+            tileLog.push(temp.peek());
+            temp.pop();
+        }
+
+        return ret;
+    }
 
     // connecting checking
     public List<TileState.Connect> getAdjacnetState() {

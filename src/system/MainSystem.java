@@ -11,31 +11,22 @@ public class MainSystem {
         GAME_END, 
         IMP_MODE,
         TILE_CONNECT_ERROR,
+        TILE_DIRECTION_ERROR,
         RAIL_CONNECT_ERROR,  
         NO_TILE_ERROR,
         ZERO_TILE_ERROR,
         OVER_TILE_ERROR  
     };
 
-    private static MainSystem instance = null;
     
     int curPlayer = 0;
     private List<Player> players = new ArrayList<Player>();
     private Lock lock = new Lock();
 
-    private MainSystem() {
+    public MainSystem() {
         players.add(new Player("P1"));
         players.add(new Player("P2"));
-    }
-
-    public static MainSystem getInstance() {
-        if (instance == null) {
-            instance = new MainSystem();
-        }
-        return instance;
-    }   
-
-    
+    }    
 
     private void endAction(MainSystem.State state) {
 
@@ -77,6 +68,11 @@ public class MainSystem {
             
             case RAIL_CONNECT_ERROR :
                 beginAction("HandleError", "RailConnectError");
+                break;
+            
+            case TILE_DIRECTION_ERROR :
+                beginAction("HandleError", "TileDirectionError");
+                break;
             
         }
        

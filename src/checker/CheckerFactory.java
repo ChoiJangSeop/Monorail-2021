@@ -13,6 +13,9 @@ public class CheckerFactory {
             case "TileConnect":
                 ret = new TileConnectChecker();
                 break;
+            case "TileDirection" :
+                ret = new TileDirectionChecker();
+                break;
             case "UseTile":
                 ret = new UseTileChecker();
                 break;

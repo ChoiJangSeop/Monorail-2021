@@ -5,14 +5,17 @@ import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.event.*;
 
-public class EndTurnButton implements ControlButton {
+import system.MainSystem;
+
+public class EndTurnButton extends ControlButton {
 
     private JButton endTurnButton = new JButton();
     private JButton turnPlayerButton = new JButton();
     private int curPlayer = 0;
 
-    public EndTurnButton() {
-        super();
+    public EndTurnButton(MainSystem mainSystem) {
+        super(mainSystem);
+
         endTurnButton.setPreferredSize(new Dimension(150, 150));
         endTurnButton.setIcon(ImgStore.getInstance().getImg("CompleteImg"));
         turnPlayerButton.setIcon(ImgStore.getInstance().getImg("P1Img"));
@@ -27,7 +30,7 @@ public class EndTurnButton implements ControlButton {
                     ImgStore.getInstance().getImg("P2Img")
                 );
 
-                boolean result = sendMessage("TurnEnd");
+                boolean result = sendMessage(mainSystem, "TurnEnd");
 
                 if (!result) {
                     curPlayer = (curPlayer + 1) % 2;

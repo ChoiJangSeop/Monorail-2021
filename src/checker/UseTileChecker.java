@@ -12,6 +12,8 @@ public class UseTileChecker extends Checker {
         if (Board.getInstance().getUseTile() == 0) {
             return MainSystem.State.ZERO_TILE_ERROR;
         }
+
+        
         return MainSystem.State.NONE;
     }
 }

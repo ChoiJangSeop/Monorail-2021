@@ -9,12 +9,16 @@ import javax.swing.JButton;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Ground implements ControlButton {
+import system.MainSystem;
+
+public class Ground extends ControlButton {
     
     private JButton[] groundBtn = new JButton[187];
     private SelectMode selectMode = new SelectMode();
 
-    public Ground() {
+    public Ground(MainSystem mainSystem) {
+        super(mainSystem);
+
         for (int i=0; i<187; ++i) {
             groundBtn[i] = new JButton();
 
@@ -38,10 +42,14 @@ public class Ground implements ControlButton {
                     // add arguments
                     List<Integer> args = new ArrayList<>();
                     args.add(pos/17); args.add(pos%17);
+
+                    // COMPLETE 타일타입 예외처리
+                    if (selectMode.getTileType() == -1) { new ErrorWindow(); return; }
                     args.add(selectMode.getTileType());
                    
-                    // TODO 타일타입 예외처리
-                    boolean result = sendMessage("PutTile", args);
+                    
+
+                    boolean result = sendMessage(mainSystem, "PutTile", args);
 
                     if (result) {
                         b.setIcon(ImgStore.getInstance().getRail(selectMode.getTileType()));

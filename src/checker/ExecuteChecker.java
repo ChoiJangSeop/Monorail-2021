@@ -5,13 +5,13 @@ import java.util.*;
 
 public class ExecuteChecker {
 
-    // TODO 같은 자리에 타일을 다시 놓을때 생기는 예외처리
+    // COMPLETE 같은 자리에 타일을 다시 놓을때 생기는 예외처리 => GUI 단계에서 처리
 
     public MainSystem.State execute(String action) {
         CheckerFactory checkerFactory = new CheckerFactory();
         List<MainSystem.State> result = new ArrayList<>();
 
-        // TODO 타일 일자로 놓는거 체킹 필요!
+        // COMPLETE 타일 일자로 놓는거 체킹 필요! => 체커 도입으로 일단은해결/보드에 타일리턴 메소드도 추가됨.
         switch(action) {
             case "PutTile": 
                 // 메세지 우선순위에 맞게 작성
@@ -19,6 +19,7 @@ public class ExecuteChecker {
                 result.add(checkerFactory.createChecker("RestTile").check());    
                 result.add(checkerFactory.createChecker("TileConnect").check());
                 result.add(checkerFactory.createChecker("RailConnect").check());
+                result.add(checkerFactory.createChecker("TileDirection").check());
                 break;                
             
             case "EndTurn":
@@ -29,6 +30,7 @@ public class ExecuteChecker {
             case "HandleError": 
                 result.add(checkerFactory.createChecker("TileConnect").check());
                 result.add(checkerFactory.createChecker("RailConnect").check());
+                result.add(checkerFactory.createChecker("TileDirection").check()); 
                 break;
             // detail
 
@@ -38,10 +40,12 @@ public class ExecuteChecker {
         result = result.stream().filter(s -> s != MainSystem.State.NONE).toList();
 
         if (result.size() == 0) {
-            System.out.println("none");
+            System.out.println(MainSystem.State.NONE);
             return MainSystem.State.NONE;
             //MainSystem.getInstance().endAction(MainSystem.State.NONE);
         } else {
+            // TODO remove debugging code
+            System.out.println(result.get(0));
             return result.get(0);
             //MainSystem.getInstance().endAction(result.get(0));
         }

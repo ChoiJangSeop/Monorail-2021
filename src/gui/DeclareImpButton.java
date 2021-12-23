@@ -4,18 +4,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class DeclareImpButton implements ControlButton {
+import system.MainSystem;
+
+public class DeclareImpButton extends ControlButton {
 
     private JButton declareImpButton = new JButton();
 
-    public DeclareImpButton() {
-        super();
+    public DeclareImpButton(MainSystem mainSystem) {
+        super(mainSystem);
 
         declareImpButton.setPreferredSize(new Dimension(150, 150));
         declareImpButton.setIcon(ImgStore.getInstance().getImg("ImpossibleImg"));
         declareImpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                sendMessage("ImpossibleDeclare");
+                sendMessage(mainSystem, "ImpossibleDeclare");
             }
         });
     }

@@ -5,23 +5,28 @@ import java.util.*;
 
 import system.MainSystem;
 
-public interface ControlButton {
-    public JButton getButton();
-    public JButton getButton(int posx, int posy);
-    
-    public default JButton getSubButton(int idx) {
+public abstract class ControlButton {
+
+    MainSystem mainSystem;
+
+    public abstract JButton getButton();
+    public abstract JButton getButton(int posx, int posy);
+
+    public ControlButton(MainSystem mainSystem) { this.mainSystem = mainSystem; }
+
+    public JButton getSubButton(int idx) {
         return new JButton();
     }
-    public default JButton getSubButton() {
+    public JButton getSubButton() {
         return new JButton();
     }
 
-    public default boolean sendMessage(String message) {
-        return MainSystem.getInstance().userBeginAction(message);
+    public boolean sendMessage(MainSystem mainSystem, String message) {
+        return mainSystem.userBeginAction(message);
     }
     
 
-    public default boolean sendMessage(String message, List<Integer> args) {
-        return MainSystem.getInstance().userBeginAction(message, args);
+    public boolean sendMessage(MainSystem mainSystem, String message, List<Integer> args) {
+        return mainSystem.userBeginAction(message, args);
     }
 }
