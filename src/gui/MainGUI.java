@@ -15,11 +15,12 @@ import system.MainSystem;
 public class MainGUI extends JFrame {
     
     private MainSystem mainSystem = new MainSystem();
+    private ImpMode impMode = new ImpMode();
 
     private JButton[] deco = new JButton[17];
-    private Ground ground = new Ground(mainSystem);
-    private EndTurnButton endTurnButton = new EndTurnButton(mainSystem);
-    private DeclareImpButton declareImpButton = new DeclareImpButton(mainSystem);
+    private Ground ground = new Ground(mainSystem, impMode);
+    private EndTurnButton endTurnButton = new EndTurnButton(mainSystem, impMode);
+    private DeclareImpButton declareImpButton = new DeclareImpButton(mainSystem, impMode);
     
 
     public MainGUI() {

@@ -3,7 +3,7 @@ package play;
 import system.MainSystem;
 public class DeclareImp implements PlayStrategy {
 
-    // TODO implement imp mode
+    // COMPLETE implement imp mode => NO NEED
     
     @Override
     public void play() {

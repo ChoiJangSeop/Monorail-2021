@@ -13,8 +13,8 @@ public class EndTurnButton extends ControlButton {
     private JButton turnPlayerButton = new JButton();
     private int curPlayer = 0;
 
-    public EndTurnButton(MainSystem mainSystem) {
-        super(mainSystem);
+    public EndTurnButton(MainSystem mainSystem, ImpMode impMode) {
+        super(mainSystem, impMode);
 
         endTurnButton.setPreferredSize(new Dimension(150, 150));
         endTurnButton.setIcon(ImgStore.getInstance().getImg("CompleteImg"));
@@ -30,7 +30,9 @@ public class EndTurnButton extends ControlButton {
                     ImgStore.getInstance().getImg("P2Img")
                 );
 
-                boolean result = sendMessage(mainSystem, "TurnEnd");
+                boolean result;
+                if (!impMode.getImp()) { result = sendMessage(mainSystem, "TurnEnd"); }
+                else { result = sendMessage(mainSystem, "GameEnd"); }
 
                 if (!result) {
                     curPlayer = (curPlayer + 1) % 2;

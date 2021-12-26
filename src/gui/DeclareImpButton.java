@@ -10,14 +10,26 @@ public class DeclareImpButton extends ControlButton {
 
     private JButton declareImpButton = new JButton();
 
-    public DeclareImpButton(MainSystem mainSystem) {
-        super(mainSystem);
+    public DeclareImpButton(MainSystem mainSystem, ImpMode impMode) {
+        super(mainSystem, impMode);
 
         declareImpButton.setPreferredSize(new Dimension(150, 150));
         declareImpButton.setIcon(ImgStore.getInstance().getImg("ImpossibleImg"));
         declareImpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                sendMessage(mainSystem, "ImpossibleDeclare");
+                JButton b = (JButton)e.getSource();
+
+                boolean result = sendMessage(mainSystem, "TurnEnd");
+
+                // result == true => 유저가 타일을 사용했다는 이야기! (불가능선언시에는 오류)
+                if (result) {
+                    // TODO pop up the error window (cannot declare impossible)
+                    
+                } else {
+                    b.setEnabled(false);
+                    impMode.goImp();
+                    // TODO change turn 
+                }
             }
         });
     }

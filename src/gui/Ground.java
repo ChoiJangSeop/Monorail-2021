@@ -16,8 +16,8 @@ public class Ground extends ControlButton {
     private JButton[] groundBtn = new JButton[187];
     private SelectMode selectMode = new SelectMode();
 
-    public Ground(MainSystem mainSystem) {
-        super(mainSystem);
+    public Ground(MainSystem mainSystem, ImpMode impMode) {
+        super(mainSystem, impMode);
 
         for (int i=0; i<187; ++i) {
             groundBtn[i] = new JButton();
@@ -46,10 +46,11 @@ public class Ground extends ControlButton {
                     // COMPLETE 타일타입 예외처리
                     if (selectMode.getTileType() == -1) { new ErrorWindow(); return; }
                     args.add(selectMode.getTileType());
-                   
-                    
 
-                    boolean result = sendMessage(mainSystem, "PutTile", args);
+                    boolean result;
+                    if (!impMode.getImp()) { result = sendMessage(mainSystem, "PutTile", args); }
+                    else { result = sendMessage(mainSystem, "ImpPutTile", args); }
+                    
 
                     if (result) {
                         b.setIcon(ImgStore.getInstance().getRail(selectMode.getTileType()));

@@ -13,8 +13,11 @@ public class PlayTrigger {
                     p.setPlayStrategy(new PutTile(arg)); 
                 } else { p.setPlayStrategy(new HandleError("InputArgError")); }
                 break;
-            
-            
+            case "ImpPutTile" :
+                if (arg.size() == 3 && arg.get(2) >= 0) {
+                    p.setPlayStrategy(new ImpPutTile(arg));
+                } else { p.setPlayStrategy(new HandleError("InputArgError")); }
+                break;
             
             default :
                 p.setPlayStrategy(new HandleError("InputArgError"));

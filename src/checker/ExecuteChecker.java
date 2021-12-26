@@ -32,22 +32,21 @@ public class ExecuteChecker {
                 result.add(checkerFactory.createChecker("RailConnect").check());
                 result.add(checkerFactory.createChecker("TileDirection").check()); 
                 break;
-            // detail
-
+            
+            case "ImpPutTile":
+                result.add(checkerFactory.createChecker("RestTile").check());
+                result.add(checkerFactory.createChecker("TileConnect").check());
+                result.add(checkerFactory.createChecker("RailConnect").check());
+                break;
         }
 
         // COMPLETE result 정리 코드 
         result = result.stream().filter(s -> s != MainSystem.State.NONE).toList();
 
         if (result.size() == 0) {
-            System.out.println(MainSystem.State.NONE);
             return MainSystem.State.NONE;
-            //MainSystem.getInstance().endAction(MainSystem.State.NONE);
         } else {
-            // TODO remove debugging code
-            System.out.println(result.get(0));
             return result.get(0);
-            //MainSystem.getInstance().endAction(result.get(0));
         }
     }
 }
