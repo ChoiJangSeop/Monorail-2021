@@ -28,6 +28,7 @@ public class DeclareImpButton extends ControlButton {
                 } else {
                     b.setEnabled(false);
                     impMode.goImp();
+                    // BUG no pop up zeroTile Error
                     // TODO change turn 
                 }
             }

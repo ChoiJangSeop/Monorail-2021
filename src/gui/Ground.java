@@ -44,7 +44,7 @@ public class Ground extends ControlButton {
                     args.add(pos/17); args.add(pos%17);
 
                     // COMPLETE 타일타입 예외처리
-                    if (selectMode.getTileType() == -1) { new ErrorWindow(); return; }
+                    if (selectMode.getTileType() == -1) { new ErrorWindow("타일의 종류를 선택해주세요"); return; }
                     args.add(selectMode.getTileType());
 
                     boolean result;

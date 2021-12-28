@@ -8,12 +8,10 @@ public class EndGame implements PlayStrategy {
     @Override
     public void play() {
         // TODO endgame play method
-        System.out.println("Game-End");
     }
 
     @Override
     public MainSystem.State validCheck() {
-        ExecuteChecker executeChecker = new ExecuteChecker();
-        return executeChecker.execute("EndGame");
+        return MainSystem.State.GAME_END;
     }
 }

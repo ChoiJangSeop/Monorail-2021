@@ -10,13 +10,13 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class ErrorWindow extends JFrame {
+public class EndWindow extends JFrame {
 
-    public ErrorWindow(String description) {
+    public EndWindow(int winner) {
         
         setTitle("Error!");
         setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        JLabel label = new JLabel(description, JLabel.CENTER);
+        JLabel label = new JLabel(winner + "P is Winner!", JLabel.CENTER);
         label.setFont(new Font("", Font.BOLD, 20));
         label.setPreferredSize(new Dimension(700, 50));
         add(label);
@@ -25,7 +25,7 @@ public class ErrorWindow extends JFrame {
 
         bt.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                System.exit(0);
             }
         });
         add(bt);

@@ -4,6 +4,7 @@ import java.util.*;
 
 import board.Board;
 
+import gui.EndWindow;
 public class MainSystem {
     public static enum State { 
         NONE,
@@ -47,7 +48,7 @@ public class MainSystem {
                 break;
             // BUG hava a leg to complete game
             case GAME_END :
-                System.out.println(curPlayer+1 + "P is winner!");
+                new EndWindow(curPlayer + 1);
                 break;
 
             case ZERO_TILE_ERROR :
