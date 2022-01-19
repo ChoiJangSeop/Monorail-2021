@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import java.nio.channels.AsynchronousSocketChannel;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -16,8 +17,8 @@ public class Ground extends ControlButton {
     private JButton[] groundBtn = new JButton[187];
     private SelectMode selectMode = new SelectMode();
 
-    public Ground(MainSystem mainSystem, ImpMode impMode) {
-        super(mainSystem, impMode);
+    public Ground(AsynchronousSocketChannel socketChannel, ImpMode impMode) {
+        super("PutTile", socketChannel, impMode);
 
         for (int i=0; i<187; ++i) {
             groundBtn[i] = new JButton();
@@ -40,27 +41,37 @@ public class Ground extends ControlButton {
                     }
                     
                     // add arguments
-                    List<Integer> args = new ArrayList<>();
-                    args.add(pos/17); args.add(pos%17);
+                    int x = pos/17; int y = pos%17;
 
                     // COMPLETE 타일타입 예외처리
                     if (selectMode.getTileType() == -1) { new ErrorWindow("타일의 종류를 선택해주세요"); return; }
-                    args.add(selectMode.getTileType());
+                    int type = selectMode.getTileType();
 
+                    // 서버에 보낼 메세지
+                    String message = myAction + " " + x + " " + y + " " + type;
+                    send(message);
+
+
+                    // TODO: handle imp situation
+                    /*
                     boolean result;
                     if (!impMode.getImp()) { result = sendMessage(mainSystem, "PutTile", args); }
                     else { result = sendMessage(mainSystem, "ImpPutTile", args); }
-                    
-
-                    if (result) {
-                        b.setIcon(ImgStore.getInstance().getRail(selectMode.getTileType()));
-                        b.setName("-1");
-                    }
-                    selectMode.initTileType();
-
+                    */
                 }
             });
         }
+    }
+
+    public void handleResult(List<Integer> args) {
+        System.out.println(args);
+        int x = args.get(0);
+        int y = args.get(1);
+        int type = args.get(2);
+
+        groundBtn[17*x + y].setIcon(ImgStore.getInstance().getRail(type));
+        groundBtn[17*x + y].setName("-1");
+        selectMode.initTileType();
     }
 
     @Override

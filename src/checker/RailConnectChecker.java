@@ -10,6 +10,9 @@ public class RailConnectChecker extends Checker {
 
         List<TileState.Connect> connectState = Board.getInstance().getAdjacnetState();
 
+        // TODO : please remove
+        System.out.println("[연결성 검사] " + connectState);
+
         if (connectState.stream().filter( state -> state == TileState.Connect.ERROR ).count() > 0) {
             return MainSystem.State.RAIL_CONNECT_ERROR;
         }

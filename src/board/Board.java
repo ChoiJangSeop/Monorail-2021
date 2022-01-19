@@ -73,6 +73,9 @@ public class Board {
         // right
         verticalLine[x][y+1] = TileState.popState(verticalLine[x][y+1], type.get(3));
 
+        // TODO:  please remove!
+        System.out.println("[pop tile 후]" + getAdjacnetState(x,y));
+
         restTile++; useTile--;
     }
     

@@ -12,6 +12,7 @@ public class PutTile implements PlayStrategy {
 
     // COMPLETE eidt input
     public PutTile(List<Integer> args) {
+
         this.x = args.get(0);
         this.y = args.get(1);
 

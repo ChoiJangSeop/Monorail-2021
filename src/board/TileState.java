@@ -43,7 +43,7 @@ public class TileState {
                 break;
             
             case DISABLED :
-                ret = (signal == 1) ? Connect.ERROR : Connect.DISABLED;
+                ret = (signal == 1) ? Connect.ERROR : Connect.DEFAULT;
                 break;
 
             default :

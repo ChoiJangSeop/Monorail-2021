@@ -18,9 +18,9 @@ public class HandleError implements PlayStrategy {
     public void play() {
          
         // COMPLETE remove rail img in GUI => 실행 결과를 GUI에게 리턴해 리턴 결과로 GUI레벨에서 처리함.
-        // TODO pop up the error windows
-        
 
+        
+        // TODO: how to send error message to client?
         switch (message)  {
             case "ZeroTileError" :
                 System.out.println("ZeroTileError");
@@ -28,14 +28,13 @@ public class HandleError implements PlayStrategy {
                 break;
 
             case "OverTileError" :
-                new ErrorWindow("철로타일은 최대 3개까지만 사용 가능합니다");         
+                new ErrorWindow("철로타일은 최대 3개까지만 사용 가능합니다");
                 Board.getInstance().popTile();
                 break;
 
             case "NoTileError" :
                 new ErrorWindow("철로타일을 1개 이상 놓아주세요");   
                 Board.getInstance().popTile();
-            
                 break;
 
             case "TileConnectError" :
