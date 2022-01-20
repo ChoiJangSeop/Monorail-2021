@@ -8,17 +8,14 @@ import javax.swing.JButton;
 
 import java.nio.channels.AsynchronousSocketChannel;
 import java.util.List;
-import java.util.ArrayList;
-
-import system.MainSystem;
 
 public class Ground extends ControlButton {
     
     private JButton[] groundBtn = new JButton[187];
     private SelectMode selectMode = new SelectMode();
 
-    public Ground(AsynchronousSocketChannel socketChannel, ImpMode impMode) {
-        super("PutTile", socketChannel, impMode);
+    public Ground(AsynchronousSocketChannel socketChannel) {
+        super("PutTile", socketChannel);
 
         for (int i=0; i<187; ++i) {
             groundBtn[i] = new JButton();
@@ -44,13 +41,12 @@ public class Ground extends ControlButton {
                     int x = pos/17; int y = pos%17;
 
                     // COMPLETE 타일타입 예외처리
-                    if (selectMode.getTileType() == -1) { new ErrorWindow("타일의 종류를 선택해주세요"); return; }
+                    if (selectMode.getTileType() == -1) { new AlertWindow("error","타일의 종류를 선택해주세요"); return; }
                     int type = selectMode.getTileType();
 
                     // 서버에 보낼 메세지
                     String message = myAction + " " + x + " " + y + " " + type;
                     send(message);
-
 
                     // TODO: handle imp situation
                     /*

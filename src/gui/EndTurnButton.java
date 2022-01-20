@@ -7,16 +7,14 @@ import java.awt.event.*;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.util.List;
 
-import system.MainSystem;
-
 public class EndTurnButton extends ControlButton {
 
     private JButton endTurnButton = new JButton();
     private JButton turnPlayerButton = new JButton();
     private int curPlayer = 0;
 
-    public EndTurnButton(AsynchronousSocketChannel socketChannel, ImpMode impMode) {
-        super("endTurn", socketChannel, impMode);
+    public EndTurnButton(AsynchronousSocketChannel socketChannel) {
+        super("EndTurn", socketChannel);
 
         endTurnButton.setPreferredSize(new Dimension(150, 150));
         endTurnButton.setIcon(ImgStore.getInstance().getImg("CompleteImg"));
@@ -39,6 +37,10 @@ public class EndTurnButton extends ControlButton {
     @Override
     public void handleResult(List<Integer> args) {
         curPlayer = (curPlayer + 1) % 2;
+
+        if (Mode.getInstance().getLock()) { Mode.getInstance().openLock(); }
+        else { Mode.getInstance().closeLock(); }
+
         turnPlayerButton.setIcon(
                 (curPlayer == 0) ?
                         ImgStore.getInstance().getImg("P1Img") :

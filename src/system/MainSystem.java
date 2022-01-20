@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 
 import board.Board;
 
+import gui.AlertWindow;
 import gui.EndWindow;
 public class MainSystem {
     public static enum State { 
@@ -62,9 +63,18 @@ public class MainSystem {
                 Client client = new Client(socketChannel);
                 players.add(player);
                 connections.add(client);
-                System.out.println("[연결된 플레이어수] : " + players.size());
+                System.out.println("[연결된 플레이어수] : " + connections.size());
 
                 serverSocketChannel.accept(null, this);
+
+                if (connections.size() == 1) {
+                    client.send("TRUE Wait");
+                } else if (connections.size() == 2) {
+                    connections.get(0).send("TRUE BeginGame 0");
+                    connections.get(1).send("TRUE BeginGame 1");
+                } else {
+                    client.send("TRUE NoGame");
+                }
             }
 
             @Override
@@ -132,6 +142,7 @@ public class MainSystem {
                         System.out.println("[클라이언트 통신 안됨] " + socketChannel.getRemoteAddress() + Thread.currentThread().getName());
                         connections.remove(Client.this);
                         socketChannel.close();
+
                     } catch (IOException e) {}
                 }
             });
