@@ -51,11 +51,11 @@ public class PlayTrigger {
                 p.setPlayStrategy(new EndGame());
                 break;
 
-            case "ImpossibleDeclare" :
+            case "DeclareImp" :
                 p.setPlayStrategy(new DeclareImp());
                 break;
             
-            case "TurnEnd" :
+            case "EndTurn" :
                 p.setPlayStrategy(new EndTurn());
                 break;
             

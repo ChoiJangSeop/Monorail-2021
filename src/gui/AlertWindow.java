@@ -10,11 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class ErrorWindow extends JFrame {
+public class AlertWindow extends JFrame {
 
-    public ErrorWindow(String description) {
+    public AlertWindow(String title, String description) {
         
-        setTitle("Error!");
+        setTitle(title);
         setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
         JLabel label = new JLabel(description, JLabel.CENTER);
         label.setFont(new Font("", Font.BOLD, 20));

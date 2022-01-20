@@ -7,14 +7,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.nio.channels.AsynchronousSocketChannel;
 
-import system.MainSystem;
-
 public class DeclareImpButton extends ControlButton {
 
     private JButton declareImpButton = new JButton();
 
-    public DeclareImpButton(AsynchronousSocketChannel socketChannel, ImpMode impMode) {
-        super("declareImp", socketChannel, impMode);
+    public DeclareImpButton(AsynchronousSocketChannel socketChannel) {
+        super("DeclareImp", socketChannel);
 
         declareImpButton.setPreferredSize(new Dimension(150, 150));
         declareImpButton.setIcon(ImgStore.getInstance().getImg("ImpossibleImg"));
